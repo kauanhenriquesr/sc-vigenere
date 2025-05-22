@@ -200,7 +200,7 @@ def crack_vigenere(ciphertext):
         quality_score, chi_squared = analyze_frequency_match(decrypted)
         
         # Avalia legibilidade (% de caracteres válidos)
-        readable = sum(1 for c in decrypted if c.isprintable() and (c.isalnum() or c.isspace() or c in '.,!?'))
+        readable = sum(1 for c in decrypted if c.isprintable() and (c.isalpha() or c.isspace() or c in '.,!?'))
         readability = readable / len(decrypted)
         
         # Score combinado
@@ -274,7 +274,7 @@ def main():
             plain_text = file.read()
         
         # Sua chave original
-        key = "kha poaor"
+        key = "kháé"
         
         # Criptografia
         encrypted_text = encrypt(plain_text, key)
