@@ -1,6 +1,6 @@
-from frequency import frequency
-from cypher.cypher_decypher import encrypt, decrypt
-from collections import Counter
+"""crack_vigenere module"""
+
+from src.cypher.cypher_decypher import encrypt
 
 PORTUGUESE_FREQUENCY = {
     'a': 14.63, 'b': 1.04, 'c': 3.88, 'd': 4.99, 'e': 12.57, 'f': 1.02, 'g': 1.30,
@@ -17,24 +17,38 @@ ENGLISH_FREQUENCY = {
     'y': 1.974, 'z': 0.074, ' ': 15.00
 }
 
+
 def index_of_coincidence(text):
+    """Calculates the Index of Coincidence (IC) for a given text."""
+
     counts = histogram(text)
-    L = len(text)
-    if L <= 1:
+
+    l = len(text)
+
+    if l <= 1:
         return 0.0
-    return sum((count / L) ** 2 for count in counts.values())
+
+    return sum((count / l) ** 2 for count in counts.values())
+
 
 def histogram(text):
+    """Creates a histogram of character occurrences in the text."""
     dictionary = {}
+
     for c in range(256):
         dictionary[c] = 0
+
     for char in text:
         dictionary[ord(char)] += 1/256
 
     print(dictionary)
+
     return dictionary
 
+
 def find_key_length(text, max_key_length=30):
+    """Attempts to find the key length of a polyalphabetic cipher using the Index of Coincidence method."""
+
     ic_scores = {}
     for key_length in range(1, max_key_length + 1):
         groups = [text[i::key_length] for i in range(key_length)]
@@ -42,9 +56,10 @@ def find_key_length(text, max_key_length=30):
         ic_scores[key_length] = avg_ic
 
     return sorted(ic_scores, key=lambda k: ic_scores[k], reverse=True)
-    
 
-texto_original ="""
+
+# A large sample text in Portuguese for testing the algorithm.
+TEXTO_ORIGINAL = """
 teste de texto gigante para testar o algoritmo de vigenere e com isso a gente vai conseguir ver a frequencia apropriada do texto. Porém contudo entretanto a gente vai testar cada vez mais, para o indice de recorrência aumentar. O rato roeu a roupa do rei de roma. A cifra de vigenere é interessante para estudos criptográficos.
 O que deve ser entregue: o código fonte e seu executável (link para repositório), descritivo (4 pg 
 max) da cifra com sua implementação e do ataque e sua implementação. 
@@ -59,17 +74,19 @@ Em uma vila escondida entre montanhas e florestas densas, vivia um velho relojoe
 Diziam que aquele relógio era mágico.
 Certo dia, uma menina chamada Clara entrou na relojoaria com um pedido incomum.
 """
-chave = "papajorgeocurioso"  # chave de tamanho 5
-find_key_length(texto_original)
-encrypted = encrypt(texto_original, chave)
+# The key used for encryption.
+CHAVE = "papajorgeocurioso"  # chave de tamanho 5
+
+encrypted = encrypt(TEXTO_ORIGINAL, CHAVE)
 
 found_key_length = find_key_length(encrypted)
 
-print(f"Texto original: '{texto_original}'")
-print(f"Chave usada: '{chave}'")
+print(f"Texto original: '{TEXTO_ORIGINAL}'")
+print(f"Chave usada: '{CHAVE}'")
 print(f"Texto cifrado: '{encrypted}'")
 
 print(f"\nChave encontrada: '{found_key_length}'")
 # Verifica se a chave está correta
-print(f"\nChave original: '{chave}'")
-print(f"Chave encontrada está correta? {'Sim' if found_key_length == chave else 'Não'}")
+print(f"\nChave original: '{CHAVE}'")
+print(
+    f"Chave encontrada está correta? {'Sim' if found_key_length == CHAVE else 'Não'}")
