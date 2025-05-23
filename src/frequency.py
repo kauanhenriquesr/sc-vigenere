@@ -1,3 +1,6 @@
+"""frequency module"""
+
+
 def histogram(string):
     """Calculates the histogram of characters in a string."""
 
