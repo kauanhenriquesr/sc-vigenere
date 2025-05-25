@@ -22,9 +22,9 @@ def run_demonstration(language: str, key: str, filepath: str):
 
     # Encrypt the plaintext.
     encrypted_text = encrypt(plain_text, key)
-    print(f"\nTexto original carregado: {len(plain_text)} caracteres")
+    print(f"\nTexto original carregado: {plain_text[:200]}...")
     print(f"Chave usada: '{key}'")
-
+    print(f"\nTexto criptografado gerado: \n{encrypted_text[:200]}...")
     # Attempt to crack the cipher.
     result = crack_vigenere(encrypted_text, language=language)
 
