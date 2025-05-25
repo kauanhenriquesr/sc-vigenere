@@ -64,7 +64,7 @@ def help():
     print("     Para descriptografar um arquivo com a chave 'key':")
     print("     Exemplo: python __main__.py --decrypt assets/exemplopt.txt key\n")
     print(" - python __main__.py --crack <filepath> <language>")
-    print("     Para quebrar uma cifra com o idioma 'pt':")
+    print("     Para quebrar uma cifra com o idioma 'pt' ou 'en':")
     print("     Exemplo: python __main__.py --crack assets/exemplopt.txt pt\n")
     print(" - python __main__.py --help")
     print("     Para ver esta ajuda.")
@@ -96,6 +96,8 @@ if __name__ == "__main__":
         key = args[2]
         encrypted_text = encrypt(text, key)
         print(encrypted_text)
+        with open(f"{filepath[:-4]}_criptografado.txt", "w", encoding='utf-8') as file:
+            file.write(encrypted_text)
         sys.exit(1)
     elif args[0] == "--decrypt" and len(args) == 3:
         print("Iniciando descriptografia...\n")
@@ -116,8 +118,9 @@ if __name__ == "__main__":
         try:
             with open(filepath, "r", encoding='utf-8') as file:
                 text = file.read()
-        except:
-            print
+        except FileNotFoundError:
+            print(f"Erro: Arquivo '{filepath}' não encontrado.")
+            sys.exit(1)
         language = args[2]
         if language not in ["pt", "en"]:
             print("Uso do programa: python __main__.py --crack <filepath> <language>\n")
@@ -125,5 +128,10 @@ if __name__ == "__main__":
             print("Exemplo: python __main__.py --crack assets/exemplopt.txt pt")
             sys.exit(1)
         result = crack_vigenere(text, language)
-        print(result)
+        print("\n=== RESULTADO FINAL ===")
+        print(f"Chave descoberta: '{result['key']}'")
+        print("\nTexto descriptografado (amostra):")
+        decrypted_text = result['decrypted']
+        print(decrypted_text[:200] +
+            "..." if len(decrypted_text) > 200 else decrypted_text)
         sys.exit(1)
