@@ -59,16 +59,16 @@ def demo():
 def help():
     print("="*50)
     print("\nExemplos de uso do programa:")
-    print(" - python __main__.py --crypt <filepath> <key>")
+    print(" - python src/__main__.py --crypt <filepath> <key>")
     print("     Para criptografar um arquivo com a chave 'key':")
-    print("     Exemplo: python __main__.py --crypt assets/exemplopt.txt key\n")
-    print(" - python __main__.py --decrypt <filepath> <key>")
+    print("     Exemplo: python src/__main__.py --crypt assets/exemplopt.txt key\n")
+    print(" - python src/__main__.py --decrypt <filepath> <key>")
     print("     Para descriptografar um arquivo com a chave 'key':")
-    print("     Exemplo: python __main__.py --decrypt assets/exemplopt.txt key\n")
-    print(" - python __main__.py --crack <filepath> <language>")
+    print("     Exemplo: python src/__main__.py --decrypt assets/exemplopt.txt key\n")
+    print(" - python src/__main__.py --crack <filepath> <language>")
     print("     Para quebrar uma cifra com o idioma 'pt' ou 'en':")
-    print("     Exemplo: python __main__.py --crack assets/exemplopt.txt pt\n")
-    print(" - python __main__.py --help")
+    print("     Exemplo: python src/__main__.py --crack assets/exemplopt.txt pt\n")
+    print(" - python src/__main__.py --help")
     print("     Para ver esta ajuda.")
     print("="*50)
     print()
@@ -76,7 +76,10 @@ def help():
 
 if __name__ == "__main__":
     args = sys.argv[1:]
-    if len(args) == 0 or args[0] not in ["--crypt", "--decrypt", "--crack", "--help"] or len(args) > 3:
+    if args[0] == "--help":
+        help()
+        sys.exit(1)
+    elif len(args) == 0:
         help()
         print("Deseja ver a demonstração exemplo do crack? [S/N]")
         if input().upper() == "S":
@@ -84,7 +87,7 @@ if __name__ == "__main__":
             demo()
             print("="*50)
             sys.exit(1)
-    elif args[0] == "--help":
+    elif len(args) != 3 or args[0] not in ["--crypt", "--decrypt", "--crack", "--help"]:
         help()
         sys.exit(1)
     elif args[0] == "--crypt" and len(args) == 3:
