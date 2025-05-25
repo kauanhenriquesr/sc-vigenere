@@ -2,7 +2,7 @@
 
 from collections import Counter
 # Imports the decrypt function from the neighboring module
-from src.cipher import decrypt
+from cipher import decrypt
 
 # --- Language Frequency Maps ---
 
@@ -188,7 +188,7 @@ def crack_vigenere(ciphertext, language='pt'):
     print("\n" + "="*60)
     print("MELHOR RESULTADO:")
     print(f"Chave encontrada: '{best['key']}'")
-    print(f"Tamanho: {best['key_length']}")
+    print(f"Tamanho: {len(best['key'])}")
     print(f"Score combinado: {best['combined_score']:.3f}")
     analyze_frequency_match(
         best['decrypted'], language=language, show_details=True)
