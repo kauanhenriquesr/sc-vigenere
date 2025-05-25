@@ -11,33 +11,43 @@ Este programa implementa a cifra de Vigenère com funcionalidades de criptografi
 O programa pode ser executado:
 
 ### 1. Para criptografar um arquivo
+
 ```bash
-python __main__.py --crypt <caminho_do_arquivo> <String da chave>
+python src/__main__.py --crypt <caminho_do_arquivo> <String da chave>
 ```
+
 Exemplo:
+
 ```bash
-python __main__.py --crypt assets/exemplopt.txt chave
+python src/__main__.py --crypt assets/exemplopt.txt chave
 ```
 
 ### 2. Descriptografar um arquivo
+
 ```bash
-python __main__.py --decrypt <caminho_do_arquivo> <String da Chave>
+python src/__main__.py --decrypt <caminho_do_arquivo> <String da Chave>
 ```
+
 Exemplo:
+
 ```bash
-python __main__.py --decrypt assets/exemplopt.txt chave
+python src/__main__.py --decrypt assets/exemplopt.txt chave
 ```
 
 ### 3. Quebrar uma cifra
+
 ```bash
-python __main__.py --crack <caminho_do_arquivo> <pt ou en>
+python src/__main__.py --crack <caminho_do_arquivo> <pt ou en>
 ```
+
 Exemplo:
+
 ```bash
-python __main__.py --crack assets/exemplopt.txt pt
+python src/__main__.py --crack assets/exemplopt.txt pt
 ```
 
 ### 4. Ver ajuda
+
 ```bash
-python __main__.py --help
+python src/__main__.py --help
 ```

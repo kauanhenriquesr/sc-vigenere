@@ -1,9 +1,10 @@
 """Main entry point for the cryptanalysis application."""
 
 # Import the necessary functions from the new modules
+import sys
 from cipher import encrypt, decrypt
 from cryptanalysis import crack_vigenere
-import sys
+
 
 def run_demonstration(language: str, key: str, filepath: str):
     """Runs the full encryption and cracking demonstration for a given language."""
@@ -54,6 +55,7 @@ def demo():
         filepath="assets/exemploen.txt"
     )
 
+
 def help():
     print("="*50)
     print("\nExemplos de uso do programa:")
@@ -70,6 +72,7 @@ def help():
     print("     Para ver esta ajuda.")
     print("="*50)
     print()
+
 
 if __name__ == "__main__":
     args = sys.argv[1:]
@@ -133,5 +136,5 @@ if __name__ == "__main__":
         print("\nTexto descriptografado (amostra):")
         decrypted_text = result['decrypted']
         print(decrypted_text[:200] +
-            "..." if len(decrypted_text) > 200 else decrypted_text)
+              "..." if len(decrypted_text) > 200 else decrypted_text)
         sys.exit(1)
