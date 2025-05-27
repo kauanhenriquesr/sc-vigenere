@@ -1,12 +1,6 @@
-"""Module with all the cryptanalysis logic."""
-
 from collections import Counter
-# Imports the decrypt function from the neighboring module
 from cipher import decrypt
 
-# --- Language Frequency Maps ---
-
-# Expected relative frequencies of letters in Portuguese (source: pt.wikipedia.org)
 PORTUGUESE_FREQ = {
     'a': 14.63, 'b': 1.04, 'c': 3.88, 'd': 4.99, 'e': 12.57, 'f': 1.02, 'g': 1.30,
     'h': 1.28, 'i': 6.18, 'j': 0.40, 'k': 0.02, 'l': 2.78, 'm': 4.74, 'n': 5.05,
@@ -15,7 +9,6 @@ PORTUGUESE_FREQ = {
     ' ': 15.0
 }
 
-# Expected relative frequencies of letters in English.
 ENGLISH_FREQ = {
     'a': 8.167, 'b': 1.492, 'c': 2.782, 'd': 4.253, 'e': 12.702, 'f': 2.228,
     'g': 2.015, 'h': 6.094, 'i': 6.966, 'j': 0.153, 'k': 0.772, 'l': 4.025,
@@ -25,17 +18,13 @@ ENGLISH_FREQ = {
     ' ': 13.0 
 }
 
-# Master dictionary to select language profile
 LANGUAGE_PROFILES = {
     'pt': PORTUGUESE_FREQ,
     'en': ENGLISH_FREQ
 }
 
-# --- Cryptanalysis Functions ---
-
 
 def index_of_coincidence(text):
-    """Calculates the Index of Coincidence (IC) for a given text."""
     n = len(text)
     if n <= 1:
         return 0
@@ -44,9 +33,6 @@ def index_of_coincidence(text):
 
 
 def find_key_length(ciphertext, max_length=15):
-    """
-    Estimates the most probable key length(s) by calculating the average IC.
-    """
     ic_scores = {}
     for key_length in range(1, max_length + 1):
         groups = [ciphertext[i::key_length] for i in range(key_length)]
@@ -57,7 +43,6 @@ def find_key_length(ciphertext, max_length=15):
 
 
 def crack_key_position(cipher_group, language='pt'):
-    """Find the key character for a specific position using frequency analysis for the given language."""
 
     expected_freq = LANGUAGE_PROFILES.get(language, PORTUGUESE_FREQ)
 
@@ -98,9 +83,6 @@ def crack_key_position(cipher_group, language='pt'):
 
 
 def analyze_frequency_match(text, language='pt', show_details=False):
-    """
-    Analyzes how well text frequencies match the standard for the given language.
-    """
     lang_freq = LANGUAGE_PROFILES.get(language, PORTUGUESE_FREQ)
 
     char_count = Counter(text.lower())
@@ -130,7 +112,6 @@ def analyze_frequency_match(text, language='pt', show_details=False):
 
 
 def crack_vigenere(ciphertext, language='pt'):
-    """Attempts to crack a Vigenère-like XOR cipher for a specific language."""
     print(f"=== INICIANDO CRIPTOANÁLISE (IDIOMA: {language.upper()}) ===")
     key_lengths = find_key_length(ciphertext)
     print("Prováveis tamanhos de chave:")
@@ -154,7 +135,6 @@ def crack_vigenere(ciphertext, language='pt'):
 
         key = ''.join(key_chars)
 
-        # Checks if the found key is a repeating pattern (e.g., 'keykeykey') and simplifies it.
         original_candidate_key = key
         for l in range(1, len(key) // 2 + 1):
             if len(key) % l == 0:
