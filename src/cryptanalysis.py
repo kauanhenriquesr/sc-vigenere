@@ -122,7 +122,7 @@ def analyze_frequency_match(text, language='pt', show_details=False):
 
     if show_details:
         print(f"\n--- Frequency Analysis ({language.upper()}) ---")
-        print(f"Chi-squared: {chi_squared:.2f} (lower is better)")
+        print(f"Qui-squared: {chi_squared:.2f}")
         print(f"Quality Score: {quality_score:.3f}")
         print(f"Approximate Matches: {matches}/{len(lang_freq)}")
 
