@@ -76,10 +76,7 @@ def help():
 
 if __name__ == "__main__":
     args = sys.argv[1:]
-    if args[0] == "--help":
-        help()
-        sys.exit(1)
-    elif len(args) == 0:
+    if len(args) == 0:
         help()
         print("Deseja ver a demonstração exemplo do crack? [S/N]")
         if input().upper() == "S":
@@ -87,6 +84,9 @@ if __name__ == "__main__":
             demo()
             print("="*50)
             sys.exit(1)
+    elif args[0] == "--help":
+        help()
+        sys.exit(1)
     elif len(args) != 3 or args[0] not in ["--crypt", "--decrypt", "--crack", "--help"]:
         help()
         sys.exit(1)

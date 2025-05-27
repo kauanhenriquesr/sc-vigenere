@@ -12,7 +12,7 @@ PORTUGUESE_FREQ = {
     'h': 1.28, 'i': 6.18, 'j': 0.40, 'k': 0.02, 'l': 2.78, 'm': 4.74, 'n': 5.05,
     'o': 10.73, 'p': 2.52, 'q': 1.20, 'r': 6.53, 's': 7.81, 't': 4.34, 'u': 4.63,
     'v': 1.67, 'w': 0.01, 'x': 0.21, 'y': 0.01, 'z': 0.47,
-    ' ': 15.0, '.': 0.5, ',': 0.3, '\n': 0.2, '!': 0.1, '?': 0.1, ':': 0.1, ';': 0.05
+    ' ': 15.0
 }
 
 # Expected relative frequencies of letters in English.
@@ -22,7 +22,7 @@ ENGLISH_FREQ = {
     'm': 2.406, 'n': 6.749, 'o': 7.507, 'p': 1.929, 'q': 0.095, 'r': 5.987,
     's': 6.327, 't': 9.056, 'u': 2.758, 'v': 0.978, 'w': 2.360, 'x': 0.150,
     'y': 1.974, 'z': 0.074,
-    ' ': 13.0  # Space frequency is also high in English
+    ' ': 13.0 
 }
 
 # Master dictionary to select language profile
