@@ -121,10 +121,10 @@ def analyze_frequency_match(text, language='pt', show_details=False):
     quality_score = matches / len(lang_freq)
 
     if show_details:
-        print(f"\n--- Frequency Analysis ({language.upper()}) ---")
-        print(f"Qui-squared: {chi_squared:.2f}")
-        print(f"Quality Score: {quality_score:.3f}")
-        print(f"Approximate Matches: {matches}/{len(lang_freq)}")
+        print(f"\n--- Análise de Frequência ({language.upper()}) ---")
+        print(f"Qui-quadrado: {chi_squared:.2f}")
+        print(f"Score de qualidade: {quality_score:.3f}")
+        print(f"Aproximadamente {matches}/{len(lang_freq)} caracteres correspondem")
 
     return quality_score, chi_squared
 
